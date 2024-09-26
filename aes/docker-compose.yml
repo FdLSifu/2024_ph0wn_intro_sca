@@ -1,0 +1,8 @@
+services:
+  remote_aes:
+    container_name: remote_aes
+    ports:
+      - "5000:5000"
+    build: .
+    restart: unless-stopped
+
