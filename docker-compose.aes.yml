@@ -1,0 +1,25 @@
+services:
+  target_aes:
+    container_name: target_aes
+    ports:
+      - "5000:5000"
+    build: aes/target
+    restart: unless-stopped
+  attack_aes:
+    container_name: attack_aes
+    build: aes/attack
+    restart: unless-stopped
+    stdin_open: true 
+    tty: true
+    network_mode: "host"
+    volumes:
+      - type: bind
+        source: /tmp/.Xauthority
+        target: /root/.Xauthority
+        read_only: true
+      - type: bind
+        source: ./aes/attack
+        target: /attack
+    environment:
+      - DISPLAY=$DISPLAY
+      

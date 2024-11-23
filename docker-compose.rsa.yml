@@ -1,0 +1,25 @@
+services:
+  target_rsa:
+    container_name: target_rsa
+    ports:
+      - "6000:6000"
+    build: rsa/target
+    restart: unless-stopped
+  attack_rsa:
+    container_name: attack_rsa
+    build: rsa/attack
+    restart: unless-stopped
+    stdin_open: true 
+    tty: true
+    network_mode: "host"
+    volumes:
+      - type: bind
+        source: /tmp/.Xauthority
+        target: /root/.Xauthority
+        read_only: true
+      - type: bind
+        source: ./rsa/attack
+        target: /attack
+    environment:
+      - DISPLAY=$DISPLAY
+      
