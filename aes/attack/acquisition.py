@@ -1,7 +1,6 @@
 from pwn import *
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.backends.backend_qt5agg
 import os
 
 NB_TRACES = 50000
